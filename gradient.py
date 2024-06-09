@@ -123,10 +123,13 @@ def random_triplet():
 
 
 while running:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
     p1,p2,p3 = filtered_triplet()
     draw_rgb_grid(points_to_rgb(plane_coordinates(p1, p2, p3)))
     pygame.display.flip()
     time.sleep(delay_seconds)
+    t_end = time.time()+delay_seconds
+    while time.time()<t_end:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+        time.sleep(0.01)
